@@ -15,6 +15,13 @@ public class MainActivity extends AppCompatActivity {
 
         Button countButton = findViewById(R.id.countButton);
 
+        if (savedInstanceState != null) {
+            count = savedInstanceState.getInt("savedCounter",0);
+            TextView counterView = findViewById(R.id.countView);
+            String stringCount =  Integer.toString(count);
+            counterView.setText(stringCount);
+        }
+
         countButton.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     count++;
@@ -23,5 +30,11 @@ public class MainActivity extends AppCompatActivity {
             counterView.setText(stringCount);
         }
     } );
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("savedCounter",count);
     }
 }
